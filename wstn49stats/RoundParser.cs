@@ -10,6 +10,7 @@ namespace wstn49stats
 	{
 		Tuple<List<int>, Queue<Draw>> GetFirstRoundOfNDraws(int numDraws, Stack<string> lines);
 		Tuple<List<int>, Queue<Draw>> GetNextDraw(Stack<string> lines, Queue<Draw> round, List<int> numbers);
+		Tuple<List<int>, List<Draw>> GetNDraws(int numDraws, int skip, List<string> lines, List<int> numbers);
 	}
 
 	public class RoundParser : IRoundParser
@@ -40,6 +41,36 @@ namespace wstn49stats
 			PopNextAndQueueItUp(lines, round, numbers);
 
 			return Tuple.Create(numbers, round);
+		}
+
+		public Tuple<List<int>, List<Draw>> GetNDraws(int numDraws, int skip, List<string> lines, List<int> numbers)
+		{
+			var draws = new List<Draw>();
+			for (var i = skip; i < numDraws+skip; i++)
+			{
+				var parts = lines[i].Split('\t');
+
+				var draw = new Draw
+				{
+					Num1 = int.Parse(parts[2]),
+					Num2 = int.Parse(parts[3]),
+					Num3 = int.Parse(parts[4]),
+					Num4 = int.Parse(parts[5]),
+					Num5 = int.Parse(parts[6]),
+					Num6 = int.Parse(parts[7]),
+				};
+
+				numbers.Add(draw.Num1);
+				numbers.Add(draw.Num2);
+				numbers.Add(draw.Num3);
+				numbers.Add(draw.Num4);
+				numbers.Add(draw.Num5);
+				numbers.Add(draw.Num6);
+
+				draws.Add(draw);
+			}
+
+			return Tuple.Create(numbers, draws);
 		}
 
 		private void PopNextAndQueueItUp(Stack<string> lines, Queue<Draw> draws, List<int> numbers)

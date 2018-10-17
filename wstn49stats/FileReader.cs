@@ -9,12 +9,13 @@ namespace wstn49stats
 {
 	public interface IFileReader
 	{
-		Stack<string> ReadEntireFileByLine(string path);
+		Stack<string> ReadEntireFileByLineIntoStack(string path);
+		List<string> ReadNLinesFromFile(int numLines, string path);
 	}
 
 	public class FileReader : IFileReader
 	{
-		public Stack<string> ReadEntireFileByLine(string path)
+		public Stack<string> ReadEntireFileByLineIntoStack(string path)
 		{
 			var lines = File.ReadLines(path);
 
@@ -23,6 +24,11 @@ namespace wstn49stats
 				stack.Push(line);
 
 			return stack;
+		}
+
+		public List<string> ReadNLinesFromFile(int numLines, string path)
+		{
+			return File.ReadLines(path).Take(numLines).ToList();
 		}
 	}
 }

@@ -10,6 +10,8 @@ namespace wstn49stats
 	{
 		void PrintRoundStats(RoundStat stats);
 		void PrintRound(Queue<Draw> draws, List<int> numbers);
+		void PrintRound(List<Draw> draws, List<int> numbers);
+		void PrintSubsiquentRound(List<Draw> draws, List<int> numbers);
 	}
 
 	public class Printer : IPrinter
@@ -47,6 +49,51 @@ namespace wstn49stats
 			Console.ForegroundColor = ConsoleColor.Gray;
 		}
 
+		public void PrintRound(List<Draw> draws, List<int> numbers)
+		{
+			foreach (var draw in draws)
+			{
+				SetConsoleColour(draw.Num1, numbers);
+				Console.Write($"{draw.Num1}-");
+				SetConsoleColour(draw.Num2, numbers);
+				Console.Write($"{draw.Num2}-");
+				SetConsoleColour(draw.Num3, numbers);
+				Console.Write($"{draw.Num3}-");
+				SetConsoleColour(draw.Num4, numbers);
+				Console.Write($"{draw.Num4}-");
+				SetConsoleColour(draw.Num5, numbers);
+				Console.Write($"{draw.Num5}-");
+				SetConsoleColour(draw.Num6, numbers);
+				Console.Write($"{draw.Num6}");
+				Console.WriteLine();
+			}
+
+			Console.ForegroundColor = ConsoleColor.Gray;
+		}
+
+		public void PrintSubsiquentRound(List<Draw> draws, List<int> numbers)
+		{
+			foreach (var draw in draws)
+			{
+				SetConsoleColourForSusiqentRounds(draw.Num1, numbers);
+				Console.Write($"{draw.Num1}-");
+				SetConsoleColourForSusiqentRounds(draw.Num2, numbers);
+				Console.Write($"{draw.Num2}-");
+				SetConsoleColourForSusiqentRounds(draw.Num3, numbers);
+				Console.Write($"{draw.Num3}-");
+				SetConsoleColourForSusiqentRounds(draw.Num4, numbers);
+				Console.Write($"{draw.Num4}-");
+				SetConsoleColourForSusiqentRounds(draw.Num5, numbers);
+				Console.Write($"{draw.Num5}-");
+				SetConsoleColourForSusiqentRounds(draw.Num6, numbers);
+				Console.Write($"{draw.Num6}");
+				Console.WriteLine();
+
+			}
+
+			Console.ForegroundColor = ConsoleColor.Gray;
+		}
+
 		private static void SetConsoleColour(int drawNumber, List<int> numbers)
 		{
 			//if (drawNumber > 1)
@@ -63,6 +110,15 @@ namespace wstn49stats
 				Console.ForegroundColor = ConsoleColor.Blue;
 			else
 				Console.ForegroundColor = ConsoleColor.DarkMagenta;
+		}
+
+		private static void SetConsoleColourForSusiqentRounds(int drawNumber, List<int> numbers)
+		{
+			var nums = numbers.Count(x => x == drawNumber);
+			if (nums == 1)
+				Console.ForegroundColor = ConsoleColor.Red;
+			else
+				Console.ForegroundColor = ConsoleColor.Gray;
 		}
 	}
 }

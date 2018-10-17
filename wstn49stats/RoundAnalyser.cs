@@ -9,7 +9,9 @@ namespace wstn49stats
 	public interface IRoundAnalyser
 	{
 		RoundStat GetStatsForRound(Queue<Draw> round, List<int> numbers);
+		RoundStat GetStatsForRound(List<Draw> round, List<int> numbers);
 		RoundStat GetStatsForFirst7Draws(Queue<Draw> round, List<int> numbers);
+		RoundStat GetStatsForFirst7Draws(List<Draw> round, List<int> numbers);
 	}
 
 	public class RoundAnalyser : IRoundAnalyser
@@ -31,6 +33,36 @@ namespace wstn49stats
 				CollectStats(draw.Num6, numbers, stats);
 
 				if (counter == count - 1)
+					SetTemplate(draw, numbers, stats);
+
+				counter++;
+			}
+
+			stats.UniqueNumbers = numbers.GroupBy(x => x).Count();
+			stats.Twos = stats.Twos / 2;
+			stats.Threes = stats.Threes / 3;
+			stats.Fours = stats.Fours / 4;
+
+			return stats;
+		}
+
+		public RoundStat GetStatsForRound(List<Draw> round, List<int> numbers)
+		{
+			var stats = new RoundStat();
+
+			var count = round.Count();
+			var counter = 0;
+
+			foreach (var draw in round)
+			{
+				CollectStats(draw.Num1, numbers, stats);
+				CollectStats(draw.Num2, numbers, stats);
+				CollectStats(draw.Num3, numbers, stats);
+				CollectStats(draw.Num4, numbers, stats);
+				CollectStats(draw.Num5, numbers, stats);
+				CollectStats(draw.Num6, numbers, stats);
+
+				if (counter == 0)
 					SetTemplate(draw, numbers, stats);
 
 				counter++;
@@ -72,6 +104,49 @@ namespace wstn49stats
 				CollectStats(draw.Num4, numbers, stats);
 				CollectStats(draw.Num5, numbers, stats);
 				CollectStats(draw.Num6, numbers, stats);
+
+				counter++;
+			}
+
+			stats.UniqueNumbers = nums.GroupBy(x => x).Count();
+			stats.Twos = stats.Twos / 2;
+			stats.Threes = stats.Threes / 3;
+			stats.Fours = stats.Fours / 4;
+
+			
+			return stats;
+		}
+
+		public RoundStat GetStatsForFirst7Draws(List<Draw> round, List<int> numbers)
+		{
+			var stats = new RoundStat();
+			var nums = new List<int>();
+			nums.AddRange(numbers);
+
+			var first = round.First();
+			nums.Remove(first.Num1);
+			nums.Remove(first.Num2);
+			nums.Remove(first.Num3);
+			nums.Remove(first.Num4);
+			nums.Remove(first.Num5);
+			nums.Remove(first.Num6);
+
+			var count = round.Count();
+			var counter = 0;
+			
+			foreach (var draw in round)
+			{
+				if (counter != 0)
+				{
+					CollectStats(draw.Num1, numbers, stats);
+					CollectStats(draw.Num2, numbers, stats);
+					CollectStats(draw.Num3, numbers, stats);
+					CollectStats(draw.Num4, numbers, stats);
+					CollectStats(draw.Num5, numbers, stats);
+					CollectStats(draw.Num6, numbers, stats);
+				}
+
+				
 
 				counter++;
 			}
