@@ -11,7 +11,8 @@ namespace wstn49stats
 	        GetLast6Rounds();
 	        //GetAllTemplatePatterns();
 	        //GetLastRoundStats();
-
+	        //Eleminator();
+	
 	        Console.ReadLine();
         }
 
@@ -197,6 +198,58 @@ namespace wstn49stats
 	    static int GetMax(List<int> sortedList)
 	    {
 		    return sortedList.Last();
+	    }
+
+	    static void Eleminator()
+	    {
+			// match excty 3 in this list
+		    var list = new List<int> {2, 3, 4, 5, 6, 12, 13, 17, 20, 21, 26, 27, 36, 37, 39, 41, 42, 46, 49};
+			IFileReader fileReader = new FileReader();
+
+		    var numbers = fileReader.ReadEntireFileByLineIntoStack("numbers.txt");
+		    var slimmedDownList = new List<string>();
+
+		    while (numbers.Count > 0)
+		    {
+			    var num = numbers.Pop();
+			    var split = num.Split('\t');
+				var draw = new Draw
+				{
+					Num1 = int.Parse(split[0]),
+					Num2 = int.Parse(split[1]),
+					Num3 = int.Parse(split[2]),
+					Num4 = int.Parse(split[3]),
+					Num5 = int.Parse(split[4]),
+					Num6 = int.Parse(split[5])
+				};
+
+			    var count = 0;
+			    if (list.Contains(draw.Num1))
+				    count++;
+			    if (list.Contains(draw.Num2))
+				    count++;
+			    if (list.Contains(draw.Num3))
+				    count++;
+			    if (list.Contains(draw.Num4))
+				    count++;
+			    if (list.Contains(draw.Num5))
+				    count++;
+			    if (list.Contains(draw.Num6))
+				    count++;
+
+
+				if(count == 3)
+					slimmedDownList.Add(num);
+		    }
+
+		    using (System.IO.StreamWriter file = 
+			    new System.IO.StreamWriter(@"SlimNum.txt"))
+		    {
+			    foreach (var n in slimmedDownList)
+			    {
+				    file.WriteLine(n);
+			    }
+		    }
 	    }
     }
 }
