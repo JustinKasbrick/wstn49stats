@@ -12,6 +12,8 @@ namespace wstn49stats
 	        //GetAllTemplatePatterns();
 	        GetLastRoundStats();
 	        //Eleminator();
+
+			DailyGetLastRoundStats();
 	
 	        Console.ReadLine();
         }
@@ -32,7 +34,33 @@ namespace wstn49stats
 
 		    allPatterns.Add(stats.Template);
 
-		    IPrinter printer = new Printer();
+		    IPrinter printer = new Printer(false);
+			
+		    printer.PrintRound(draws, numbers);
+		    printer.PrintRoundStats(stats);
+
+
+		    Console.WriteLine();
+		    printer.PrintRoundStats(first7Draws);
+	    }
+
+		static void DailyGetLastRoundStats()
+	    {
+		    IFileReader fileReader = new FileReader();
+		    var lines = fileReader.ReadNLinesFromFile(10, "dailydata.txt");
+
+		    IRoundParser roundParser = new DailyRoundParser();
+		    var (numbers, draws) = roundParser.GetNDraws(10, 0, lines, new List<int>());
+
+		    var allPatterns = new List<string>();
+
+		    IRoundAnalyser roundAnalyser = new DailyRoundAnalyser();
+		    var stats = roundAnalyser.GetStatsForRound(draws, numbers);
+		    var first7Draws = roundAnalyser.GetStatsForFirst7Draws(draws, numbers);
+
+		    allPatterns.Add(stats.Template);
+
+		    IPrinter printer = new Printer(true);
 			
 		    printer.PrintRound(draws, numbers);
 		    printer.PrintRoundStats(stats);
@@ -50,7 +78,7 @@ namespace wstn49stats
 		    IRoundParser roundParser = new RoundParser();
 		    var (numbers, draws) = roundParser.GetNDraws(7, 0, lines, new List<int>());
 
-		    IPrinter printer = new Printer();
+		    IPrinter printer = new Printer(false);
 			Console.WriteLine("??-??-??-??-??-??");
 		    printer.PrintRound(draws, numbers);
 		    Console.WriteLine();
@@ -95,7 +123,7 @@ namespace wstn49stats
 		    allTwos.Add(stats.Twos);
 		    allThrees.Add(stats.Threes);
 
-		    IPrinter printer = new Printer();
+		    IPrinter printer = new Printer(false);
 			
 		    printer.PrintRound(draws, numbers);
 		    printer.PrintRoundStats(stats);

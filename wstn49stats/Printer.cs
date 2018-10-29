@@ -16,6 +16,12 @@ namespace wstn49stats
 
 	public class Printer : IPrinter
 	{
+		private readonly bool _daily;
+
+		public Printer(bool daily)
+		{
+			_daily = daily;
+		}
 		public void PrintRoundStats(RoundStat stats)
 		{
 			Console.WriteLine($"Template: {stats.Template}");
@@ -40,9 +46,13 @@ namespace wstn49stats
 				SetConsoleColour(draw.Num4, numbers);
 				Console.Write($"{draw.Num4}-");
 				SetConsoleColour(draw.Num5, numbers);
-				Console.Write($"{draw.Num5}-");
-				SetConsoleColour(draw.Num6, numbers);
-				Console.Write($"{draw.Num6}");
+				Console.Write($"{draw.Num5}");
+				if(!_daily)
+				{
+					SetConsoleColour(draw.Num6, numbers);
+					Console.Write($"-{draw.Num6}");
+				}
+				
 				Console.WriteLine();
 			}
 
@@ -62,9 +72,13 @@ namespace wstn49stats
 				SetConsoleColour(draw.Num4, numbers);
 				Console.Write($"{draw.Num4}-");
 				SetConsoleColour(draw.Num5, numbers);
-				Console.Write($"{draw.Num5}-");
-				SetConsoleColour(draw.Num6, numbers);
-				Console.Write($"{draw.Num6}");
+				Console.Write($"{draw.Num5}");
+				if(!_daily)
+				{
+					SetConsoleColour(draw.Num6, numbers);
+					Console.Write($"-{draw.Num6}");
+				}
+				
 				Console.WriteLine();
 			}
 
@@ -84,9 +98,13 @@ namespace wstn49stats
 				SetConsoleColourForSusiqentRounds(draw.Num4, numbers);
 				Console.Write($"{draw.Num4}-");
 				SetConsoleColourForSusiqentRounds(draw.Num5, numbers);
-				Console.Write($"{draw.Num5}-");
-				SetConsoleColourForSusiqentRounds(draw.Num6, numbers);
-				Console.Write($"{draw.Num6}");
+				Console.Write($"{draw.Num5}");
+				if(!_daily)
+				{
+					SetConsoleColourForSusiqentRounds(draw.Num6, numbers);
+					Console.Write($"-{draw.Num6}");
+				}
+				
 				Console.WriteLine();
 
 			}

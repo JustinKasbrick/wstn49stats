@@ -47,7 +47,9 @@
     <Compile Include="Printer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DailyRoundAnalyser.cs" />
     <Compile Include="RoundAnalyser.cs" />
+    <Compile Include="DailyRoundParser.cs" />
     <Compile Include="RoundParser.cs" />
     <Compile Include="FinalStat.cs" />
     <Compile Include="RoundStat.cs" />
