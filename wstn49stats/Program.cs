@@ -8,9 +8,9 @@ namespace wstn49stats
     {
         static void Main(string[] args)
         {
-	        GetLast6Rounds();
+	        //GetLast6Rounds();
 	        //GetAllTemplatePatterns();
-	        //GetLastRoundStats();
+	        GetLastRoundStats();
 	        //Eleminator();
 	
 	        Console.ReadLine();
