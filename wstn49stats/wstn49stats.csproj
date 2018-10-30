@@ -42,8 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DailyBonusRoundParser.cs" />
+    <Compile Include="DailyBonusRoundAnalyser.cs" />
     <Compile Include="Draw.cs" />
     <Compile Include="FileReader.cs" />
+    <Compile Include="DailyBonusPrinter.cs" />
     <Compile Include="Printer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

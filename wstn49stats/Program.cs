@@ -10,11 +10,14 @@ namespace wstn49stats
         {
 	        //GetLast6Rounds();
 	        //GetAllTemplatePatterns();
-	        GetLastRoundStats();
+	        //GetLastRoundStats();
 	        //Eleminator();
 
+			//DailyGetLast6Rounds();
 			DailyGetLastRoundStats();
-	
+
+			DailyBonusGetLastRoundStats();
+
 	        Console.ReadLine();
         }
 
@@ -70,6 +73,32 @@ namespace wstn49stats
 		    printer.PrintRoundStats(first7Draws);
 	    }
 
+	    static void DailyBonusGetLastRoundStats()
+	    {
+		    IFileReader fileReader = new FileReader();
+		    var lines = fileReader.ReadNLinesFromFile(10, "dailydata.txt");
+
+		    IRoundParser roundParser = new DailyBonusRoundParser();
+		    var (numbers, draws) = roundParser.GetNDraws(7, 0, lines, new List<int>());
+
+		    var allPatterns = new List<string>();
+
+		    IRoundAnalyser roundAnalyser = new DailyBonusRoundAnalyser();
+		    var stats = roundAnalyser.GetStatsForRound(draws, numbers);
+		    var first7Draws = roundAnalyser.GetStatsForFirst7Draws(draws, numbers);
+
+		    allPatterns.Add(stats.Template);
+
+		    IPrinter printer = new DailyBonusPrinter();
+			
+		    printer.PrintRound(draws, numbers);
+		    printer.PrintRoundStats(stats);
+
+
+		    Console.WriteLine();
+		    printer.PrintRoundStats(first7Draws);
+	    }
+
 	    static void GetLast6Rounds()
 	    {
 		    IFileReader fileReader = new FileReader();
@@ -86,6 +115,35 @@ namespace wstn49stats
 		    for (int i = 0; i < 5; i++)
 		    {
 			    for (int j = 0; j < 8; j++)
+			    {
+				    (numbers, draws) = roundParser.GetNDraws(1, 7+((i*8)+j), lines, numbers);
+				    printer.PrintSubsiquentRound(draws, numbers);
+			    }
+			    
+				Console.WriteLine();
+			    
+
+		    }
+
+		    Console.ReadLine();
+	    }
+
+		static void DailyGetLast6Rounds()
+	    {
+		    IFileReader fileReader = new FileReader();
+		    var lines = fileReader.ReadNLinesFromFile(9+(10*5), "dailydata.txt");
+
+		    IRoundParser roundParser = new DailyRoundParser();
+		    var (numbers, draws) = roundParser.GetNDraws(9, 0, lines, new List<int>());
+
+		    IPrinter printer = new Printer(true);
+			Console.WriteLine("??-??-??-??-??");
+		    printer.PrintRound(draws, numbers);
+		    Console.WriteLine();
+
+		    for (int i = 0; i < 5; i++)
+		    {
+			    for (int j = 0; j < 10; j++)
 			    {
 				    (numbers, draws) = roundParser.GetNDraws(1, 7+((i*8)+j), lines, numbers);
 				    printer.PrintSubsiquentRound(draws, numbers);
