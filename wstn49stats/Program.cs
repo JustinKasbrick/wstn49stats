@@ -13,10 +13,10 @@ namespace wstn49stats
 	        //GetLastRoundStats();
 	        //Eleminator();
 
-			//DailyGetLast6Rounds();
-			DailyGetLastRoundStats();
+			DailyGetLast6Rounds();
+			//DailyGetLastRoundStats();
 
-			DailyBonusGetLastRoundStats();
+			//DailyBonusGetLastRoundStats();
 
 	        Console.ReadLine();
         }
@@ -24,7 +24,7 @@ namespace wstn49stats
 	    static void GetLastRoundStats()
 	    {
 		    IFileReader fileReader = new FileReader();
-		    var lines = fileReader.ReadNLinesFromFile(8, "w49data.txt");
+		    var lines = fileReader.ReadNLinesFromFile(8, "../../../Data/w49data.txt");
 
 		    IRoundParser roundParser = new RoundParser();
 		    var (numbers, draws) = roundParser.GetNDraws(8, 0, lines, new List<int>());
@@ -50,7 +50,7 @@ namespace wstn49stats
 		static void DailyGetLastRoundStats()
 	    {
 		    IFileReader fileReader = new FileReader();
-		    var lines = fileReader.ReadNLinesFromFile(10, "dailydata.txt");
+		    var lines = fileReader.ReadNLinesFromFile(10, "../../../Data/dailydata.txt");
 
 		    IRoundParser roundParser = new DailyRoundParser();
 		    var (numbers, draws) = roundParser.GetNDraws(10, 0, lines, new List<int>());
@@ -76,7 +76,7 @@ namespace wstn49stats
 	    static void DailyBonusGetLastRoundStats()
 	    {
 		    IFileReader fileReader = new FileReader();
-		    var lines = fileReader.ReadNLinesFromFile(10, "dailydata.txt");
+		    var lines = fileReader.ReadNLinesFromFile(10, "../../../Data/dailydata.txt");
 
 		    IRoundParser roundParser = new DailyBonusRoundParser();
 		    var (numbers, draws) = roundParser.GetNDraws(7, 0, lines, new List<int>());
@@ -102,7 +102,7 @@ namespace wstn49stats
 	    static void GetLast6Rounds()
 	    {
 		    IFileReader fileReader = new FileReader();
-		    var lines = fileReader.ReadNLinesFromFile(7+(8*5), "w49data.txt");
+		    var lines = fileReader.ReadNLinesFromFile(7+(8*5), "../../../Data/w49data.txt");
 
 		    IRoundParser roundParser = new RoundParser();
 		    var (numbers, draws) = roundParser.GetNDraws(7, 0, lines, new List<int>());
@@ -131,7 +131,7 @@ namespace wstn49stats
 		static void DailyGetLast6Rounds()
 	    {
 		    IFileReader fileReader = new FileReader();
-		    var lines = fileReader.ReadNLinesFromFile(9+(10*5), "dailydata.txt");
+		    var lines = fileReader.ReadNLinesFromFile(9+(10*5), "../../../Data/dailydata.txt");
 
 		    IRoundParser roundParser = new DailyRoundParser();
 		    var (numbers, draws) = roundParser.GetNDraws(9, 0, lines, new List<int>());
@@ -160,7 +160,7 @@ namespace wstn49stats
 	    static void GetAllTemplatePatterns()
 	    {
 		    IFileReader fileReader = new FileReader();
-		    var lines = fileReader.ReadEntireFileByLineIntoStack("w49data.txt");
+		    var lines = fileReader.ReadEntireFileByLineIntoStack("../../../Data/w49data.txt");
 
 		    IRoundParser roundParser = new RoundParser();
 		    var (numbers, draws) = roundParser.GetFirstRoundOfNDraws(8, lines);
@@ -243,7 +243,7 @@ namespace wstn49stats
 			var grps = allPatterns.GroupBy(x => x);
 
 		    using (System.IO.StreamWriter file = 
-			    new System.IO.StreamWriter(@"Templates.txt"))
+			    new System.IO.StreamWriter(@"../../../Data/Templates.txt"))
 		    {
 			    foreach (var grp in grps)
 			    {
@@ -292,7 +292,7 @@ namespace wstn49stats
 		    var list = new List<int> {2, 3, 4, 5, 6, 12, 13, 17, 20, 21, 26, 27, 36, 37, 39, 41, 42, 46, 49};
 			IFileReader fileReader = new FileReader();
 
-		    var numbers = fileReader.ReadEntireFileByLineIntoStack("numbers.txt");
+		    var numbers = fileReader.ReadEntireFileByLineIntoStack("../../../Data/numbers.txt");
 		    var slimmedDownList = new List<string>();
 
 		    while (numbers.Count > 0)
