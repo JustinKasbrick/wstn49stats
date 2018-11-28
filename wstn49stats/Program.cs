@@ -10,10 +10,10 @@ namespace wstn49stats
         {
 	        //GetLast6Rounds();
 	        //GetAllTemplatePatterns();
-	        //GetLastRoundStats();
+	        GetLastRoundStats();
 	        //Eleminator();
 
-			DailyGetLast6Rounds();
+			//DailyGetLast6Rounds();
 			//DailyGetLastRoundStats();
 
 			//DailyBonusGetLastRoundStats();

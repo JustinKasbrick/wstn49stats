@@ -1,3 +1,11 @@
+2066.	Saturday, November 24, 2018	03	07	11	14	41	47
+2065.	Wednesday, November 21, 2018	13	14	15	19	20	21
+2064.	Saturday, November 17, 2018	06	13	15	20	23	24
+2063.	Wednesday, November 14, 2018	12	24	36	37	39	46
+2062.	Saturday, November 10, 2018	04	15	32	39	45	49
+2061.	Wednesday, November 07, 2018	07	08	17	26	29	39
+2060.	Saturday, November 03, 2018	09	16	22	24	29	44
+2059.	Wednesday, October 31, 2018	06	12	15	38	47	48
 2058.	Saturday, October 27, 2018	09	17	29	31	32	48
 2057.	Wednesday, October 24, 2018	04	09	12	29	38	49
 2056.	Saturday, October 20, 2018	05	08	14	16	18	44
