@@ -47,6 +47,7 @@
     <Compile Include="Draw.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="DailyBonusPrinter.cs" />
+    <Compile Include="NewThought\CountAllNumbers.cs" />
     <Compile Include="Printer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,5 +64,6 @@
   <ItemGroup>
     <Content Include="w49data.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

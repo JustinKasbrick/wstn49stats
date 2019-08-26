@@ -30,5 +30,5 @@ namespace wstn49stats
 		{
 			return File.ReadLines(path).Take(numLines).ToList();
 		}
-	}
+    }
 }

@@ -8,9 +8,10 @@ namespace wstn49stats
     {
         static void Main(string[] args)
         {
+            NewThought.CountAllNumbers.Count();
 	        //GetLast6Rounds();
 	        //GetAllTemplatePatterns();
-	        GetLastRoundStats();
+	        //GetLastRoundStats();
 	        //Eleminator();
 
 			//DailyGetLast6Rounds();
