@@ -48,6 +48,7 @@
     <Compile Include="FileReader.cs" />
     <Compile Include="DailyBonusPrinter.cs" />
     <Compile Include="NewThought\CountAllNumbers.cs" />
+    <Compile Include="PickGames\Pick2Import.cs" />
     <Compile Include="Printer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
